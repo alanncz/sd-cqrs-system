@@ -16,7 +16,7 @@ import org.glassfish.jersey.server.ResourceConfig;
  *
  * @author alann
  */
-public class Server {
+public class AlannApp {
     
     public static void main(String args []) throws IOException, URISyntaxException{
         ResourceConfig config = new ResourceConfig().packages("com.natansevero.alannapp.resource");

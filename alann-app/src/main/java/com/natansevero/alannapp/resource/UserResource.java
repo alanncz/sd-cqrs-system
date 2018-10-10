@@ -15,18 +15,21 @@ import java.sql.SQLException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author alann
  */
+
+@Path("/alannapp")
 public class UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public void newUser(Usuario user) throws SQLException, ClassNotFoundException, RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.createRegistry(3030);
+        Registry registry = LocateRegistry.getRegistry(3030);
         ManagerService stub = (ManagerService) registry.lookup("ManagerService");
         stub.inserir(user);
     }

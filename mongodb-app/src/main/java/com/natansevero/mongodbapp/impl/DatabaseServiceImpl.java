@@ -21,7 +21,8 @@ public class DatabaseServiceImpl implements DatabaseService {
     
     @Override
     public boolean inserir(Usuario usuario) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.insert(usuario);
+        return true;
     }
 
     @Override

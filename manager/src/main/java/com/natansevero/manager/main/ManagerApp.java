@@ -5,7 +5,7 @@
  */
 package com.natansevero.manager.main;
 
-import com.natansevero.manager.main.services.ManagerServiceImpl;
+import com.natansevero.manager.services.ManagerServiceImpl;
 import com.natansevero.shared.services.DatabaseService;
 import com.natansevero.shared.services.ManagerService;
 import com.natansevero.shared.services.TxCoordService;

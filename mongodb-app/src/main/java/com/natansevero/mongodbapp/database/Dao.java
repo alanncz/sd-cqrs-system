@@ -32,6 +32,10 @@ public class Dao {
         return instance;
     }
     
+    public void insert(Usuario usuario){
+        collection.insertOne(usuario);
+    }
+    
     public List<Usuario> listAll() {
         List<Usuario> usuarios = new ArrayList<>();
         MongoCursor cursor = collection.find().iterator();

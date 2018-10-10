@@ -47,9 +47,9 @@ public class ManagerApp {
         
         ManagerService obj = new ManagerServiceImpl(txCoord, databases);
         
-        TxCoordService stub = (TxCoordService) UnicastRemoteObject.exportObject(obj, 0);
-        Registry registry = LocateRegistry.createRegistry(3131);
-        registry.bind("TxCoordService", stub);
+        ManagerService stub = (ManagerService) UnicastRemoteObject.exportObject(obj, 0);
+        Registry registry = LocateRegistry.createRegistry(3030);
+        registry.bind("ManagerService", stub);
     }
     
 }

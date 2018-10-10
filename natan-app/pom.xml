@@ -50,7 +50,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.natansevero.natanapp.main.Main</mainClass>
+                            <mainClass>com.natansevero.natanapp.main.NatanApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

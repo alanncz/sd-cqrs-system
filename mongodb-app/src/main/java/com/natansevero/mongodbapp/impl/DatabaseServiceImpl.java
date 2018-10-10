@@ -8,6 +8,7 @@ package com.natansevero.mongodbapp.impl;
 import com.natansevero.mongodbapp.database.Dao;
 import com.natansevero.shared.model.Usuario;
 import com.natansevero.shared.services.DatabaseService;
+import com.natansevero.shared.services.TxDatabaseService;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import java.util.List;
  *
  * @author natan
  */
-public class DatabaseServiceImpl implements DatabaseService {
+public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
 
+    private boolean inTransaction = false;
     Dao dao = Dao.getInstance();
     
     @Override
@@ -33,6 +35,25 @@ public class DatabaseServiceImpl implements DatabaseService {
     @Override
     public List<Usuario> buscarTodos() throws RemoteException {
         return dao.listAll();
+    }
+    
+     @Override
+    public void prepare() throws RemoteException {
+        inTransaction = true;
+    }
+
+    @Override
+    public void roolback() throws RemoteException {
+        if (inTransaction) {
+            inTransaction = false;
+        }
+    }
+
+    @Override
+    public void commit() throws RemoteException {
+        if (inTransaction) {
+            inTransaction = false;
+        }
     }
     
 }

@@ -6,11 +6,13 @@
 package com.natansevero.shared.model;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author natan
  */
+@XmlRootElement
 public class Usuario implements Serializable {
     private String uuid;
     private String nome;

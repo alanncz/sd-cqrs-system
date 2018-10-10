@@ -21,7 +21,7 @@ import com.natansevero.shared.services.TxCoordService;
  *
  * @author natan
  */
-public class Main {
+public class TxCoordinatorApp {
     
     public static TxDatabaseService getPostgresObj() throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry(1515);

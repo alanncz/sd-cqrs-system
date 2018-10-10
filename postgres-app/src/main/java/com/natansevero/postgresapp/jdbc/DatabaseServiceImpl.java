@@ -7,7 +7,6 @@ package com.natansevero.postgresapp.jdbc;
 
 import com.natansevero.shared.model.Usuario;
 import com.natansevero.shared.services.DatabaseService;
-import com.natansevero.shared.services.TxCoordinatorService;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,12 +15,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.natansevero.shared.services.TxDatabaseService;
 
 /**
  *
  * @author alann
  */
-public class DatabaseServiceImpl implements DatabaseService, TxCoordinatorService {
+public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
 
     private static final String URL = "jdbc:postgresql://database:5432/database";
     private static final String USER = "root";

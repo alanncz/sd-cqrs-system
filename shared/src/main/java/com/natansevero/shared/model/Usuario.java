@@ -5,11 +5,13 @@
  */
 package com.natansevero.shared.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author natan
  */
-public class Usuario {
+public class Usuario implements Serializable {
     private String uuid;
     private String nome;
     private String imageUrl;

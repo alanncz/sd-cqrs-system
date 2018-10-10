@@ -12,8 +12,8 @@ import java.rmi.RemoteException;
  *
  * @author natan
  */
-public interface TxCoorService extends Remote {
+public interface TxCoordService extends Remote {
     void prepareAll() throws RemoteException;
     void commitAll() throws RemoteException;
-    void roolback() throws RemoteException;
+    void roolbackAll() throws RemoteException;
 }

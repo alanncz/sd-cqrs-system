@@ -5,40 +5,40 @@
  */
 package com.natansevero.txcoordinator.impl;
 
-import com.natansevero.shared.services.TxCoorService;
-import com.natansevero.shared.services.TxCoordinatorService;
+import com.natansevero.shared.services.TxDatabaseService;
 import java.rmi.RemoteException;
 import java.util.List;
+import com.natansevero.shared.services.TxCoordService;
 
 /**
  *
  * @author natan
  */
-public class TxCoorServiceImpl implements TxCoorService {
+public class TxCoordServiceImpl implements TxCoordService {
 
-    private List<TxCoordinatorService> txCoordinators;
+    private List<TxDatabaseService> txDatabases;
     
-    public TxCoorServiceImpl(List<TxCoordinatorService> txCoordinators) throws RemoteException {
-        this.txCoordinators = txCoordinators;
+    public TxCoordServiceImpl(List<TxDatabaseService> txDatabases) throws RemoteException {
+        this.txDatabases = txDatabases;
     }
     
     @Override
     public void prepareAll() throws RemoteException {
-        for(TxCoordinatorService tcs: this.txCoordinators) {
+        for(TxDatabaseService tcs: this.txDatabases) {
             tcs.prepare();
         }
     }
 
     @Override
     public void commitAll() throws RemoteException {
-        for(TxCoordinatorService tcs: this.txCoordinators) {
+        for(TxDatabaseService tcs: this.txDatabases) {
             tcs.commit();
         }
     }
 
     @Override
-    public void roolback() throws RemoteException {
-        for(TxCoordinatorService tcs: this.txCoordinators) {
+    public void roolbackAll() throws RemoteException {
+        for(TxDatabaseService tcs: this.txDatabases) {
             tcs.commit();
         }
     }

@@ -15,7 +15,7 @@ import org.restlet.routing.Router;
  *
  * @author natan
  */
-public class Main {
+public class NatanApp {
     public static void main(String[] args) throws Exception {
         int port = 8081;
 

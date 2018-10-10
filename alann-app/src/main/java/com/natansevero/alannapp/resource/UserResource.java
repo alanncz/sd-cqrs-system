@@ -31,7 +31,7 @@ public class UserResource {
     public void newUser(Usuario user) throws SQLException, ClassNotFoundException, RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry(3030);
         ManagerService stub = (ManagerService) registry.lookup("ManagerService");
-        stub.inserir(user);
+        System.out.println(stub.inserir(user));
     }
 
     @GET

@@ -23,7 +23,7 @@ import com.natansevero.shared.services.TxDatabaseService;
  */
 public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
 
-    private static final String URL = "jdbc:postgresql://database:5432/database";
+    private static final String URL = "jdbc:postgresql://localhost:5434/database";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private boolean inTransaction;
@@ -43,7 +43,8 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
                     ps.setString(1, usuario.getNome());
                     ps.setString(2, usuario.getImageUrl());
                     ps.setString(3, usuario.getUuid());
-                    return true;
+                    
+                    return ps.executeUpdate() > 0;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(DatabaseServiceImpl.class.getName()).log(Level.SEVERE, null, ex);

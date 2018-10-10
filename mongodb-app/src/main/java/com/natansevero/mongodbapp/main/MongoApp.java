@@ -17,7 +17,7 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author natan
  */
-public class Main {
+public class MongoApp {
     public static void main(String[] args) throws RemoteException, AlreadyBoundException {
         DatabaseService databaseService = new DatabaseServiceImpl();
         DatabaseService stub = (DatabaseService) UnicastRemoteObject.exportObject(databaseService, 0);

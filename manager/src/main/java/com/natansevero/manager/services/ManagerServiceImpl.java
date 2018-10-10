@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.natansevero.manager.main.services;
+package com.natansevero.manager.services;
 
 import com.natansevero.shared.model.Usuario;
 import com.natansevero.shared.services.DatabaseService;

@@ -39,18 +39,8 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
     @Override
     public boolean inserir(Usuario usuario) throws RemoteException {
         if (inTransaction) {
-            
             try {
-
                 this.transResult.moveToInsertRow();
-                //Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
-                //String sql = "insert into usuario (nome,imageurl,uuid) values(?, ?, ?)";
-                //try (PreparedStatement ps = con.prepareStatement(sql)) {
-                //    ps.setString(1, usuario.getNome());
-                //    ps.setString(2, usuario.getImageUrl());
-                //    ps.setString(3, usuario.getUuid());
-                //    return true;
-                //}
                 this.transResult.updateString(1, usuario.getUuid());
                 this.transResult.updateString(2, usuario.getNome());
                 this.transResult.updateString(3, usuario.getImageUrl());

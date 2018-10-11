@@ -10,12 +10,9 @@ import com.natansevero.shared.services.DatabaseService;
 import com.natansevero.shared.services.ManagerService;
 import com.natansevero.shared.services.TxCoordService;
 import java.rmi.RemoteException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.Semaphore;
 
 /**
  *
@@ -25,26 +22,32 @@ public class ManagerServiceImpl implements ManagerService {
 
     private final TxCoordService txCoord;
     private final List<DatabaseService> listDatabaseServices;
+    private final Semaphore semaphore;
 
     public ManagerServiceImpl(TxCoordService txCoord, List<DatabaseService> listDatabaseServices) {
         this.txCoord = txCoord;
         this.listDatabaseServices = listDatabaseServices;
+        this.semaphore = new Semaphore(1);
     }
 
     @Override
     public boolean inserir(Usuario usuario) throws RemoteException {
-        txCoord.prepareAll();
-
         try {
+            this.semaphore.acquire();
+            
+            txCoord.prepareAll();
+
             for (DatabaseService objeto : listDatabaseServices) {
                 usuario.setUuid(generateUUID());
                 objeto.inserir(usuario);
             }
             txCoord.commitAll();
             return true;
-        } catch(RemoteException e){
+        } catch(RemoteException | InterruptedException e){
             txCoord.roolbackAll();
             throw new RemoteException(e.getMessage());
+        } finally {
+            this.semaphore.release();
         }
     }
     

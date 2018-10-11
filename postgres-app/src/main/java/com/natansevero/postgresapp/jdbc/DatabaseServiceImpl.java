@@ -26,6 +26,7 @@ import java.sql.Statement;
 public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
 
     private static final String URL = "jdbc:postgresql://localhost:5434/database";
+//    private static final String URL = "jdbc:postgresql://dbpostgres-link:5434/database";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private boolean inTransaction;

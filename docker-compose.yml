@@ -1,0 +1,66 @@
+version: '3'
+services:
+  dbpostgres:
+    build: ./postgres-app/database
+    container_name: dbpostgres
+    ports:
+      - "5434:5432"
+
+  dbmongo: 
+    image: mongo
+    container_name: dbmongo
+    ports:
+      - "27017:27017"
+
+  postgresapp:
+    build: ./postgres-app
+    container_name: postgresapp
+    depends_on:
+      - dbpostgres
+    links:
+      - "dbpostgres:dbpostgres-link"
+    network_mode: host
+  
+  mongodbapp: 
+    build: ./mongodb-app
+    container_name: mongodbapp
+    depends_on:
+      - dbmongo
+    links:
+      - "dbmongo:dbmongo-link"
+    network_mode: host
+
+  txcoordinator:
+    build: ./tx-coordinator
+    container_name: txcoordinator
+    depends_on: 
+      - postgresapp
+      - mongodbapp
+    network_mode: host
+
+  manager: 
+    build: ./manager
+    container_name: manager
+    depends_on: 
+      - txcoordinator
+      - postgresapp
+      - mongodbapp
+    network_mode: host
+
+  alannapp:
+    build: ./alann-app
+    container_name: alannapp
+    # ports:
+    #   - "8081:8080"
+    depends_on: 
+      - manager
+    network_mode: host
+
+  natanapp: 
+    build: ./natan-app
+    container_name: natanapp
+    # ports:
+    #   - "8082:8081"
+    depends_on:
+      - mongodbapp
+    network_mode: host

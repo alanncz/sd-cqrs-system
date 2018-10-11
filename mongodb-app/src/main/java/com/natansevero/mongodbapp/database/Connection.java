@@ -27,12 +27,12 @@ public class Connection {
         codecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(), 
             fromProviders(PojoCodecProvider.builder().automatic(true).build()));
        
-        client = new MongoClient("localhost",
-                MongoClientOptions.builder().codecRegistry(codecRegistry).build()
-        );
+         client = new MongoClient("localhost",
+             MongoClientOptions.builder().codecRegistry(codecRegistry).build()
+         );
 
-//        client = new MongoClient("banco-mongodb-app",
-//                MongoClientOptions.builder().codecRegistry(codecRegistry).build()
+//        client = new MongoClient("dbmongo-link",
+//            MongoClientOptions.builder().codecRegistry(codecRegistry).build()
 //        );
         
         database = client.getDatabase("cqrssystem").withCodecRegistry(codecRegistry);

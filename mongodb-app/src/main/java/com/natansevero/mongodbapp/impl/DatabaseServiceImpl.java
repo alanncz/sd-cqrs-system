@@ -10,6 +10,9 @@ import com.natansevero.shared.model.Usuario;
 import com.natansevero.shared.services.DatabaseService;
 import com.natansevero.shared.services.TxDatabaseService;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,12 +21,21 @@ import java.util.List;
  */
 public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
 
-    private boolean inTransaction = false;
-    Dao dao = Dao.getInstance();
+    private boolean inTransaction;
+    private LinkedList<Usuario> transResult;
+    private Dao dao;
+    
+    public DatabaseServiceImpl() {
+        dao = Dao.getInstance();
+        this.inTransaction = false;
+        this.transResult = new LinkedList<>();
+    }
     
     @Override
     public boolean inserir(Usuario usuario) throws RemoteException {
-        dao.insert(usuario);
+        // jogar na list
+        transResult.add(usuario);
+        
         return true;
     }
 
@@ -40,11 +52,15 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
      @Override
     public void prepare() throws RemoteException {
         inTransaction = true;
+        // pegar os dados e jogar na transResult
+        transResult = (LinkedList<Usuario>) dao.listAll();
     }
 
     @Override
     public void roolback() throws RemoteException {
         if (inTransaction) {
+            // transResult null
+            transResult = null;
             inTransaction = false;
         }
     }
@@ -52,6 +68,9 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
     @Override
     public void commit() throws RemoteException {
         if (inTransaction) {
+            // insert
+            Usuario usuario = transResult.getLast();
+            dao.insert(usuario);
             inTransaction = false;
         }
     }

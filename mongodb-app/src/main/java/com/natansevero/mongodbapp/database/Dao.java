@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.natansevero.shared.model.Usuario;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class Dao {
     }
     
     public List<Usuario> listAll() {
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new LinkedList<>();
         MongoCursor cursor = collection.find().iterator();
 //        
         while(cursor.hasNext()) {

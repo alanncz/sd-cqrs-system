@@ -18,12 +18,10 @@ import javax.ws.rs.core.MediaType;
  */
 public class ClientApp {
     public static void main(String[] args) throws IOException  {
-
-        String uuid = "hsdahufei";
+        
         String name = "Alann";
         String imageLink = "https://www.comboinfinito.com.br/principal/wp-content/uploads/2017/04/goku-dragon-ball.jpg";
         Usuario user = new Usuario();
-        user.setUuid(uuid);
         user.setNome(name);
         user.setImageUrl(imageLink);
         Client client = Client.create(new DefaultClientConfig());

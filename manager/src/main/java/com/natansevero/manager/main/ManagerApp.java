@@ -39,14 +39,14 @@ public class ManagerApp {
         return (TxCoordService) registry.lookup("TxCoordService");
     }
     
-   public static void main(String[] args) throws RemoteException, NotBoundException, AlreadyBoundException {
+    public static void main(String[] args) throws RemoteException, NotBoundException, AlreadyBoundException {
         List<DatabaseService> databases = new ArrayList<>();
         databases.add(getPostgresObj());
         databases.add(getMongoDbObj());
         TxCoordService txCoord = getCoord();       
-        
+
         ManagerService obj = new ManagerServiceImpl(txCoord, databases);
-        
+
         ManagerService stub = (ManagerService) UnicastRemoteObject.exportObject(obj, 0);
         Registry registry = LocateRegistry.createRegistry(3030);
         registry.bind("ManagerService", stub);

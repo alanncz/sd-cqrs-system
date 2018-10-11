@@ -23,7 +23,7 @@
         </dependency>
     </dependencies>
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -35,7 +35,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.natansevero.mongodbapp.main.Main</mainClass>
+                            <mainClass>com.natansevero.mongodbapp.main.MongoApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

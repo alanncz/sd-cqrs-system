@@ -10,7 +10,12 @@ import com.natansevero.shared.services.DatabaseService;
 import com.natansevero.shared.services.ManagerService;
 import com.natansevero.shared.services.TxCoordService;
 import java.rmi.RemoteException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +29,6 @@ public class ManagerServiceImpl implements ManagerService {
     public ManagerServiceImpl(TxCoordService txCoord, List<DatabaseService> listDatabaseServices) {
         this.txCoord = txCoord;
         this.listDatabaseServices = listDatabaseServices;
-
     }
 
     @Override
@@ -33,16 +37,20 @@ public class ManagerServiceImpl implements ManagerService {
 
         try {
             for (DatabaseService objeto : listDatabaseServices) {
+                usuario.setUuid(generateUUID());
                 objeto.inserir(usuario);
             }
             txCoord.commitAll();
             return true;
-        }catch(RemoteException e){
+        } catch(RemoteException e){
             txCoord.roolbackAll();
             throw new RemoteException(e.getMessage());
         }
-        
-
+    }
+    
+    public String generateUUID() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 
 }

@@ -19,7 +19,7 @@ public class ReadOperation implements Runnable {
     @Override
     public void run() {
         Client client = Client.create(new DefaultClientConfig());
-        WebResource webResource = client.resource("http://localhost:8081/app/usuarios");
+        WebResource webResource = client.resource("http://localhost:8082/app/usuarios");
         String texto = webResource.type(MediaType.APPLICATION_JSON).get(String.class);
         System.out.println(texto);
     }

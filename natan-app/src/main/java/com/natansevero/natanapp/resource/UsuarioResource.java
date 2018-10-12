@@ -32,7 +32,8 @@ public class UsuarioResource extends ServerResource {
     public Representation getAllPersons() throws RemoteException, NotBoundException {
         JSONArray response = new JSONArray();
         
-        Registry registry = LocateRegistry.getRegistry(2020);
+//        Registry registry = LocateRegistry.getRegistry(2020);
+        Registry registry = LocateRegistry.getRegistry("mongodbapp-link", 2020);
         DatabaseService stub = (DatabaseService) registry.lookup("DatabaseService");
         List<Usuario> usuarios = stub.buscarTodos();
         

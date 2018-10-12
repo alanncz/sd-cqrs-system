@@ -24,12 +24,14 @@ import com.natansevero.shared.services.TxCoordService;
 public class TxCoordinatorApp {
     
     public static TxDatabaseService getPostgresObj() throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(1515);
+//        Registry registry = LocateRegistry.getRegistry(1515);
+        Registry registry = LocateRegistry.getRegistry("postgresapp-link", 1515);        
         return (TxDatabaseService) registry.lookup("DatabaseService");
     }
     
     public static TxDatabaseService getMongoDbObj() throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(2020);
+//        Registry registry = LocateRegistry.getRegistry(2020);
+        Registry registry = LocateRegistry.getRegistry("mongodbapp-link", 2020);
         return (TxDatabaseService) registry.lookup("DatabaseService");
     }
     

@@ -18,14 +18,13 @@ import org.glassfish.jersey.server.ResourceConfig;
  */
 public class AlannApp {
     
-    public static void main(String args []) throws IOException, URISyntaxException{
+    public static void main(String[] args) throws IOException, URISyntaxException{
         ResourceConfig config = new ResourceConfig().packages("com.natansevero.alannapp.resource");
         URI uri = new URI("http://0.0.0.0:8080/");
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
         System.out.println("servidor rodando...");
         System.in.read();
         server.shutdown();
-        
     }
     
 }

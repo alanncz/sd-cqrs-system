@@ -19,7 +19,6 @@ services:
       - dbpostgres
     links:
       - "dbpostgres:dbpostgres-link"
-    network_mode: host
   
   mongodbapp: 
     build: ./mongodb-app
@@ -28,7 +27,6 @@ services:
       - dbmongo
     links:
       - "dbmongo:dbmongo-link"
-    network_mode: host
 
   txcoordinator:
     build: ./tx-coordinator
@@ -36,7 +34,9 @@ services:
     depends_on: 
       - postgresapp
       - mongodbapp
-    network_mode: host
+    links:
+      - "postgresapp:postgresapp-link"
+      - "mongodbapp:mongodbapp-link"
 
   manager: 
     build: ./manager
@@ -45,22 +45,27 @@ services:
       - txcoordinator
       - postgresapp
       - mongodbapp
-    network_mode: host
+    links:
+      - "txcoordinator:txcoordinator-link"
+      - "postgresapp:postgresapp-link"
+      - "mongodbapp:mongodbapp-link"
 
   alannapp:
     build: ./alann-app
     container_name: alannapp
-    # ports:
-    #   - "8081:8080"
+    ports:
+      - "8081:8080"
     depends_on: 
       - manager
-    network_mode: host
+    links:
+      - "manager:manager-link"
 
   natanapp: 
     build: ./natan-app
     container_name: natanapp
-    # ports:
-    #   - "8082:8081"
+    ports:
+      - "8082:8081"
     depends_on:
       - mongodbapp
-    network_mode: host
+    links:
+      - "mongodbapp:mongodbapp-link"

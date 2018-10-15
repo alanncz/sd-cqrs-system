@@ -8,6 +8,7 @@ package com.natansevero.alannapp.main;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.concurrent.CountDownLatch;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -18,14 +19,14 @@ import org.glassfish.jersey.server.ResourceConfig;
  */
 public class AlannApp {
     
-    public static void main(String args []) throws IOException, URISyntaxException{
+    public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
         ResourceConfig config = new ResourceConfig().packages("com.natansevero.alannapp.resource");
         URI uri = new URI("http://0.0.0.0:8080/");
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
         System.out.println("servidor rodando...");
-        System.in.read();
-        server.shutdown();
-        
+        new CountDownLatch(1).await();
+//        System.in.read();
+//        server.shutdown();
     }
     
 }

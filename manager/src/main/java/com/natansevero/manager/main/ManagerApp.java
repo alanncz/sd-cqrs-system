@@ -25,17 +25,20 @@ import java.util.List;
 public class ManagerApp {
     
     public static DatabaseService getPostgresObj() throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(1515);
+//        Registry registry = LocateRegistry.getRegistry(1515);
+        Registry registry = LocateRegistry.getRegistry("postgresapp-link", 1515);
         return (DatabaseService) registry.lookup("DatabaseService");
     }
     
     public static DatabaseService getMongoDbObj() throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(2020);
+//        Registry registry = LocateRegistry.getRegistry(2020);
+        Registry registry = LocateRegistry.getRegistry("mongodbapp-link", 2020);        
         return (DatabaseService) registry.lookup("DatabaseService");
     }
     
     public static TxCoordService getCoord() throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(3131);
+//        Registry registry = LocateRegistry.getRegistry(3131);
+        Registry registry = LocateRegistry.getRegistry("txcoordinator-link", 3131);        
         return (TxCoordService) registry.lookup("TxCoordService");
     }
     

@@ -29,7 +29,8 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public void newUser(Usuario user) throws SQLException, ClassNotFoundException, RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(3030);
+//        Registry registry = LocateRegistry.getRegistry(3030);
+        Registry registry = LocateRegistry.getRegistry("manager-link", 3030);        
         ManagerService stub = (ManagerService) registry.lookup("ManagerService");
         System.out.println(stub.inserir(user));
     }

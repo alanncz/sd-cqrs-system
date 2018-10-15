@@ -10,8 +10,6 @@ import com.natansevero.shared.model.Usuario;
 import com.natansevero.shared.services.DatabaseService;
 import com.natansevero.shared.services.TxDatabaseService;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,6 +71,11 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
             dao.insert(usuario);
             inTransaction = false;
         }
+    }
+
+    @Override
+    public void removerTodos() throws RemoteException {
+        dao.deleteAll();
     }
     
 }

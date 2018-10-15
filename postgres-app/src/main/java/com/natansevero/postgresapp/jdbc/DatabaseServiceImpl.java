@@ -45,7 +45,7 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
                 this.transResult.updateString(1, usuario.getUuid());
                 this.transResult.updateString(2, usuario.getNome());
                 this.transResult.updateString(3, usuario.getImageUrl());
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(DatabaseServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -109,7 +109,7 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
     }
 
     @Override
-    public void commit() throws RemoteException{
+    public void commit() throws RemoteException {
         if (inTransaction) {
             try {
                 this.transResult.insertRow();
@@ -117,6 +117,20 @@ public class DatabaseServiceImpl implements DatabaseService, TxDatabaseService {
                 Logger.getLogger(DatabaseServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
             inTransaction = false;
+        }
+    }
+
+    @Override
+    public void removerTodos() throws RemoteException {
+        try {
+            Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+            
+            String sql = "delete from usuario";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.execute();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -8,9 +8,9 @@ package com.natansevero.mongodbapp.database;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.natansevero.shared.model.Usuario;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.Document;
 
 /**
  *
@@ -35,6 +35,10 @@ public class Dao {
     
     public void insert(Usuario usuario){
         collection.insertOne(usuario);
+    }
+    
+    public void deleteAll() {
+        collection.deleteMany(new Document());
     }
     
     public List<Usuario> listAll() {

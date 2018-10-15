@@ -18,4 +18,5 @@ public interface DatabaseService extends Remote {
     boolean inserir(Usuario usuario) throws RemoteException;
     Usuario buscar(String uuid) throws RemoteException;
     List<Usuario> buscarTodos() throws RemoteException;
+    void removerTodos() throws RemoteException;
 }

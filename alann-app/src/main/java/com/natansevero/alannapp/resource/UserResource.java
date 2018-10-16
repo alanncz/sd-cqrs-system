@@ -35,11 +35,14 @@ public class UserResource {
         System.out.println(stub.inserir(user));
     }
 
+    
+    
     @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String newUser() {
-        System.out.println("ping");
-        return "ping";
+    public String removerTodos() throws RemoteException, NotBoundException {
+        Registry registry = LocateRegistry.getRegistry("manager-link", 3030);        
+        ManagerService stub = (ManagerService) registry.lookup("ManagerService");
+        stub.removerTodos();
+        return "removeu todos";
     }
 
 }

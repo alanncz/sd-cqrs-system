@@ -27,8 +27,6 @@ public class WriteOperation implements Runnable {
     public void run() {
         Client client = Client.create(new DefaultClientConfig());
         WebResource webResource = client.resource("http://localhost:8081/alannapp");
-        String texto = webResource.type(MediaType.APPLICATION_JSON).get(String.class);
-        System.out.println(texto);
         webResource.type(MediaType.APPLICATION_XML).post(usuario);
     }
 

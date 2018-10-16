@@ -15,4 +15,5 @@ import java.rmi.RemoteException;
  */
 public interface ManagerService extends Remote {
     boolean inserir(Usuario usuario) throws RemoteException;
+    void removerTodos() throws RemoteException;
 }

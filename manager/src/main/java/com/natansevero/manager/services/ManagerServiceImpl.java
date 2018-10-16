@@ -51,6 +51,13 @@ public class ManagerServiceImpl implements ManagerService {
         }
     }
     
+    @Override
+    public void removerTodos() throws RemoteException {
+        for (DatabaseService objeto : this.listDatabaseServices) {
+                objeto.removerTodos();
+        }
+    }
+    
     public String generateUUID() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
